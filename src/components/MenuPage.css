@@ -10,14 +10,6 @@
 }
 
 /* Заголовок */
-.menu-title {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-/* Блок с суммарной информацией */
 .menu-header {
   display: flex;
   justify-content: space-around;
@@ -31,7 +23,6 @@
 /* Вкладки меню */
 .menu-tabs {
   display: flex;
-  justify-content: flex-end;
   gap: 10px;
   margin-bottom: 15px;
 }
@@ -59,6 +50,8 @@
 
 /* Список элементов меню */
 .menu-items {
+  height: 350px;
+  overflow: auto;
   list-style: none;
   padding: 0;
 }
@@ -80,27 +73,11 @@
   margin-right: 12px;
   width: 18px;
   height: 18px;
-  accent-color: #6b73ff; /* красивый цвет чекбокса */
+  accent-color: #6b73ff;
 }
 
-/* Текущий выбранный элемент */
+/* Текущий раздел */
 .current-item {
   color: #6b73ff;
   font-weight: bold;
-}
-
-.back-button {
-  display: flex;
-  justify-self: flex-end;
-  width: fit-content;
-  margin-top: 20px;
-  padding: 10px 18px;
-  background: #6b73ff;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: background 0.3s;
-}
-.back-button:hover {
-  background: #4e5bff;
 }
