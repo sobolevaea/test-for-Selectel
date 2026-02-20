@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { menuList } from "../data/menu.ts";
 import type { MenuItem } from "../types/menu.ts";
 import "./MenuPage.css";
@@ -19,22 +19,15 @@ export default function Menu() {
     });
   };
 
-  useEffect(() => {
-    setSelectedItems([])
-  }, [activeMenuId])
-
   const activeMenu = menuList.find((menu) => menu.id === activeMenuId);
   const menuItems = activeMenu?.items || [];
 
-  // количество
   const totalCount = selectedItems.length;
 
-  // сумма
   const totalPrice = useMemo(() => {
     return selectedItems.reduce((sum, item) => sum + item.price, 0);
   }, [selectedItems]);
 
-  // текущий выбранный (последний)
   const currentItem =
     menuList.length > 0
       ? activeMenu?.name
@@ -49,7 +42,6 @@ export default function Menu() {
       </div>
 
       <ul className="menu-tabs menu-items">
-
         {menuList.map((menu) => (
           <button
             key={menu.id}
@@ -57,7 +49,6 @@ export default function Menu() {
             onClick={() => setActiveMenuId(menu.id)}>
             {menu.name}</button>
         ))}
-
       </ul>
 
       <ul className="menu-items">
@@ -74,7 +65,6 @@ export default function Menu() {
           </li>
         ))}
       </ul>
-
     </div>
   );
 }
