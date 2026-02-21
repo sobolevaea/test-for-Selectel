@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 import Home from "./components/HomePage"
 import Menu from "./components/MenuPage"
-import './App.css'
 
 function App() {
   return (

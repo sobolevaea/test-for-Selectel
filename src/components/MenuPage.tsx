@@ -49,49 +49,51 @@ export default function Menu() {
   const currentItem: string = activeMenu ? activeMenu.name : "Ничего не выбрано";
 
   return (
-    <div className="menu-container">
-      <div className="menu-header">
-        <span>
-          Раздел: <span className="current-item">{currentItem}</span>
-        </span>
-        <span>Выбрано пунктов: {totalCount}</span>
-        <span>Стоимость: {totalPrice} ₽</span>
-      </div>
+    <div className="menu-wrapper">
+      <section className="menu">
+        <div className="menu-header">
+          <span>
+            Раздел: <span className="current-item">{currentItem}</span>
+          </span>
+          <span>Выбрано пунктов: {totalCount}</span>
+          <span>Стоимость: {totalPrice} ₽</span>
+        </div>
 
-      <div className="menu-tabs">
-        {menuList.length > 0 ? (
-          menuList.map((menu) => (
-            <button
-              key={menu.id}
-              className={menu.id === activeMenuId ? "active" : ""}
-              onClick={() => setActiveMenuId(menu.id)}
-            >
-              {menu.name}
-            </button>
-          ))
-        ) : (
-          <div>Меню недоступно</div>
-        )}
-      </div>
+        <div className="menu-tabs">
+          {menuList.length > 0 ? (
+            menuList.map((menu) => (
+              <button
+                key={menu.id}
+                className={menu.id === activeMenuId ? "active" : ""}
+                onClick={() => setActiveMenuId(menu.id)}
+              >
+                {menu.name}
+              </button>
+            ))
+          ) : (
+            <div>Меню недоступно</div>
+          )}
+        </div>
 
-      <ul className="menu-items">
-        {menuItems.length > 0 ? (
-          menuItems.map((item) => (
-            <li key={item.id} className="menu-item">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={selectedItems.some((i) => i.id === item.id)}
-                  onChange={() => handleToggle(item)}
-                />
-                {item.name} — {item.price} ₽
-              </label>
-            </li>
-          ))
-        ) : (
-          <li>Элементы отсутствуют</li>
-        )}
-      </ul>
+        <ul className="menu-items">
+          {menuItems.length > 0 ? (
+            menuItems.map((item) => (
+              <li key={item.id} className="menu-item" onClick={() => handleToggle(item)}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={selectedItems.some((i) => i.id === item.id)}
+                    onChange={() => handleToggle(item)}
+                  />
+                  {item.name} — {item.price} ₽
+                </label>
+              </li>
+            ))
+          ) : (
+            <li>Элементы отсутствуют</li>
+          )}
+        </ul>
+      </section>
     </div>
   );
 }
