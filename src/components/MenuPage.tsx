@@ -1,12 +1,12 @@
-import { useState, useMemo, useEffect } from "react";
-import { menuList } from "../data/menu.ts";
-import type { MenuItem, Menu } from "../types/menu.ts";
 import "./MenuPage.css";
+import { menuList } from "../data/menu.ts";
+import { useState, useMemo } from "react";
+import type { MenuItem, Menu } from "../types/menu.ts";
 
 export default function Menu() {
-  const [activeMenuId, setActiveMenuId] = useState<number | null>(
-    menuList.length > 0 ? menuList[0].id : null
-  );
+  const initialMenuId = menuList[0]?.id ?? null;
+
+  const [activeMenuId, setActiveMenuId] = useState<number | null>(initialMenuId);
 
   const [selectedItemsByMenu, setSelectedItemsByMenu] = useState<Record<number, MenuItem[]>>({});
 
@@ -15,10 +15,11 @@ export default function Menu() {
 
   const menuItems: MenuItem[] = activeMenu?.items || [];
 
-  const selectedItems = useMemo(() => {
-    if (activeMenuId === null) return [];
-    return selectedItemsByMenu[activeMenuId] || [];
-  }, [selectedItemsByMenu, activeMenuId]);
+  const selectedItems = useMemo(() => (
+    activeMenuId
+      ? selectedItemsByMenu[activeMenuId] ?? []
+      : []
+  ), [selectedItemsByMenu, activeMenuId]);
 
   const handleToggle = (item: MenuItem) => {
     if (activeMenuId === null) return;
@@ -33,12 +34,6 @@ export default function Menu() {
       };
     });
   };
-
-  useEffect(() => {
-    if (menuList.length !== 0 && activeMenu === null) {
-      setActiveMenuId(menuList[0].id);
-    }
-  }, [menuList, activeMenu]);
 
   const totalCount = selectedItems.length;
   const totalPrice = useMemo(
