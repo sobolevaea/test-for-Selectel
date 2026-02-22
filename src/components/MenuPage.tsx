@@ -73,7 +73,7 @@ export default function Menu() {
         <ul className="menu-items">
           {menuItems.length > 0 ? (
             menuItems.map((item) => (
-              <li key={item.id} className="menu-item" onClick={() => handleToggle(item)}>
+              <li key={item.id} className="menu-item">
                 <label>
                   <input
                     type="checkbox"
